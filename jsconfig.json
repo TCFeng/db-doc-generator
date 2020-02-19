@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    // 一定要用commonjs，才可以解析省略沒寫的/index.js
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "paths": {
+      "~~atoms/": ["src/components/atoms/index"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+  
