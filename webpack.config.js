@@ -42,7 +42,8 @@ module.exports = {
     resolve: {
         alias: {
             '~~components': path.resolve(__dirname, 'src/components/'),
-            '~~atoms': path.resolve(__dirname, 'src/components/atoms')
+            '~~atoms': path.resolve(__dirname, 'src/components/atoms'),
+            '~~styles': path.resolve(__dirname, 'src/styles'),
         },
         extensions: [
             '.js',

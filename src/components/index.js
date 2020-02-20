@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { hot } from 'react-hot-loader/root';
-import { Form, Input, Button } from '~~atoms/';
+import { Form, Row, Col, Label, Input, Button } from '~~atoms/';
 
 import * as Style from './Style';
 
@@ -18,7 +18,12 @@ const Main = () => {
 
   return (
     <Style.Container>
-      <Input placeholder="Basic usage 12345" />
+      <Form.Main>
+        <Row type="flex">
+          <Col span={5}><Label>Engine</Label></Col>
+          <Col span={19}><Label>123</Label></Col>
+        </Row>
+      </Form.Main>
     </Style.Container>
   );
 };
