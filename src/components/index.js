@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Form, Input, Button } from '~~atoms/';
 
-// import * as Style from './Style';
+import * as Style from './Style';
 
 const electron = window.require('electron');
 const fs = window.require('fs');
@@ -17,7 +17,9 @@ const { app, dialog } = remote;
 const Main = () => {
 
   return (
-    <Input placeholder="Basic usage 1" />
+    <Style.Container>
+      <Input placeholder="Basic usage 12345" />
+    </Style.Container>
   );
 };
 
