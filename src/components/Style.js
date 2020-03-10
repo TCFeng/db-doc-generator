@@ -3,21 +3,22 @@ import { Row } from '~~atoms/';
 
 export const Container = styled.div`
   .ant-row-flex {
-    padding-bottom: 15px;
+    padding-bottom: 50px;
   }
 `;
 
 export const Header = styled(Row)`
+  display: flex;
+  align-items: center;
   background-color: #0092ff;
-  width: 97%;
-  margin: 20px 20px;
-  padding: 3px 16px;
-  cursor: pointer;
+  width: 100%;
+  padding: 20px;
   height: 150px;
+  font-size: 40px;
+  color: white;
 `;
 
 export const Content = styled(Row)`
-  width: 97%;
   margin: 20px;
-  padding: 30px;
+  padding: 15px 30px;
 `;

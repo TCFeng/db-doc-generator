@@ -19,7 +19,7 @@ const Main = () => {
     <Style.Container>
       <Form.Main>
         <Style.Header>
-          <h1>Postgres Doc Generator</h1>
+          Postgres Doc Generator
         </Style.Header>
         <Style.Content>
           <Row>
