@@ -23,28 +23,28 @@ const Main = () => {
         </Style.Header>
         <Style.Content>
           <Row>
-            <Col span={6}><Label>URL</Label></Col>
-            <Col span={18}><Input placeholder="Database URL"/></Col>
+            <Col span={6}><Label>DB Url</Label></Col>
+            <Col span={18}><Input placeholder="127.0.0.1"/></Col>
           </Row>
           <Row>
             <Col span={6}><Label>PORT</Label></Col>
-            <Col span={18}><Input placeholder="Port"/></Col>
+            <Col span={10}><Input placeholder="5432"/></Col>
           </Row>
           <Row>
             <Col span={6}><Label>DB NAME</Label></Col>
-            <Col span={18}><Input placeholder="Database Name"/></Col>
+            <Col span={10}><Input placeholder="Database Name"/></Col>
           </Row>
           <Row>
             <Col span={6}><Label>USER</Label></Col>
-            <Col span={18}><Input placeholder="User Account"/></Col>
+            <Col span={10}><Input placeholder="User Account"/></Col>
           </Row>
           <Row>
             <Col span={6}><Label>PASSWORD</Label></Col>
-            <Col span={18}><Input placeholder="Password"/></Col>
+            <Col span={10}><Input.Password placeholder="Password"/></Col>
           </Row>
           <Row>
-            <Col span={18}></Col>
-            <Col span={6}><Button type="primary">Generate</Button></Col>
+            <Col span={20}></Col>
+            <Col span={4}><Button type="primary">Generate</Button></Col>
           </Row>
         </Style.Content>
       </Form.Main>
