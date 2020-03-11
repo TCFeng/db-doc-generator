@@ -9,8 +9,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Header = styled(Row)`
-  margin: 0px auto 0px;
+export const Header = styled.div`
   display: flex;
   align-items: center;
   background-color: #0092ff;
@@ -19,12 +18,20 @@ export const Header = styled(Row)`
   height: 150px;
   font-size: 40px;
   color: white;
+
+  &>div {
+    width: 100%;
+  }
 `;
 
-export const Content = styled(Row)`
+export const Content = styled.div`
   padding: 35px 50px;
 
   &>div {
     margin-bottom: 24px;
   }
+`;
+
+export const Footer = styled.div`
+  text-align:right
 `;
