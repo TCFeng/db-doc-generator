@@ -6,4 +6,6 @@ export { default as Label } from './Label/Label';
 export { default as Input } from './Input/Input';
 export { default as InputNumber } from './InputNumber/InputNumber';
 export { default as Button } from './Button/Button';
+export { default as Spin } from './Spin/Spin';
+export { default as Alert } from './Alert/Alert';
 export { default as WarningText } from './WarningText/WarningText';

@@ -33,5 +33,5 @@ export const Content = styled.div`
 `;
 
 export const Footer = styled.div`
-  text-align:right
+  
 `;
