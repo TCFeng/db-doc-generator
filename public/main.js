@@ -49,7 +49,19 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+const sleep = milliseconds => {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
 
 ipcMain.on('save-data', (event, data) => {
-  PgDocService.getDoc(data);
+
+  sleep(3000);
+  //PgDocService.getDoc(data);
+  console.log('1111111111');
+  event.sender.send('asynchronous-reply', 'pong')
 });

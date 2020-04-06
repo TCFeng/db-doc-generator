@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Form, Row, Col, Label, Input, Spin, Button, Alert } from '~~atoms/';
 import { DatabaseOutlined, DownloadOutlined } from '@ant-design/icons';
@@ -15,7 +15,7 @@ const {
 
 
 const Main = () => {
-  const [loadStatus, setLoadStatus] = useState({isLoading : false});
+  const [isLoading, setIsLoading] = useState(false);
   const [dbData, setDbData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -33,31 +33,16 @@ const Main = () => {
     setDbData({ [name]: newValue });
   }
 
-  const myFunction = i => {
-    (function doStuff() {
-      console.log(i);
-      i -= 1;
-  
-      if (i >= 0) {
-        setTimeout(doStuff, 5000);
-      }
-    }());
+
+
+  const genDocument = async () => {
+    setIsLoading(true);
+    ipcRenderer.send('save-data', dbData);
   }
 
-  const genDocument = (data) => {
-    try {
-      setLoadStatus({isLoading : true});
-      // 先等三秒測試
-      myFunction(3000);
-      // ipcRenderer.send('save-data', dbData);
-    } catch (err) {
-      // setError(err.message);
-      throw err;
-    } finally {
-      setLoadStatus({isLoading : false});
-    }
-
-  }
+  ipcRenderer.on('asynchronous-reply', (event, arg) => {
+    setIsLoading(false);
+  })
 
   return (
     <Style.Container>
@@ -68,7 +53,7 @@ const Main = () => {
             <Col span={21}>Postgres Doc Generator</Col>
           </Row>
         </Style.Header>
-        <Spin spinning={loadStatus.isLoading}>
+        <Spin spinning={isLoading}>
           <Style.Content>
             <Row>
               <Col span={6}><Label>DB Host</Label></Col>
@@ -95,10 +80,16 @@ const Main = () => {
         <Style.Footer>
           <Row>
             <Col span={1}></Col>
-            <Col span={16}><Alert message="Loading..." type="info" /></Col>
+            <Col span={16}>
+              {isLoading ? (
+                <Alert message="Loading..." type="info" />
+              ) : (
+                  <Alert message="Success!" type="success" />
+                )}
+            </Col>
             <Col span={2}></Col>
             <Col span={4}>
-              <Button type="primary" icon={<DownloadOutlined />} size='large' onClick={genDocument}>
+              <Button type="primary" icon={<DownloadOutlined />} size='large' onClick={genDocument} disabled={isLoading}>
                 Download
               </Button>
             </Col>
