@@ -12,10 +12,27 @@ const {
   ipcRenderer, shell, remote, desktopCapturer, screen, clipboard
 } = electron;
 
+const download = (data) => {
+  const blob = new Blob([data], { type: ' text/html' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.setAttribute('hideden', '');
+  a.setAttribute('href', url);
+  a.setAttribute('download', 'index.html');
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+ipcRenderer.on('asynchronous-reply', (event, arg) => {
+  download(arg);
+})
 
 
 const Main = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [dbData, setDbData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -33,16 +50,18 @@ const Main = () => {
     setDbData({ [name]: newValue });
   }
 
-
-
   const genDocument = async () => {
     setIsLoading(true);
+    setIsError(false);
     ipcRenderer.send('save-data', dbData);
   }
 
   ipcRenderer.on('asynchronous-reply', (event, arg) => {
     setIsLoading(false);
+    setIsError(true);
+    setErrorMsg('Show me the money');
   })
+
 
   return (
     <Style.Container>
@@ -84,7 +103,12 @@ const Main = () => {
               {isLoading ? (
                 <Alert message="Loading..." type="info" />
               ) : (
-                  <Alert message="Success!" type="success" />
+                  ''
+                )}
+              {isError ? (
+                <Alert message={errorMsg} type="error" />
+              ) : (
+                  ''
                 )}
             </Col>
             <Col span={2}></Col>

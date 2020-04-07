@@ -60,8 +60,7 @@ const sleep = milliseconds => {
 
 ipcMain.on('save-data', (event, data) => {
 
-  sleep(3000);
   //PgDocService.getDoc(data);
   console.log('1111111111');
-  event.sender.send('asynchronous-reply', 'pong')
+  event.sender.send('asynchronous-reply', '<!DOCTYPE html><html><head></head><body>Hello World</body></html>')
 });
