@@ -23,6 +23,7 @@ const Main = () => {
   const [dbData, setDbData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
+      projectName: 'My project',
       host: '127.0.0.1',
       port: 5432,
       dbName: '',
@@ -56,15 +57,17 @@ const Main = () => {
   }
 
   useEffect(() => {
-    ipcRenderer.on('asynchronous-reply', (event, arg) => {
+    ipcRenderer.on('doc-result', (event, arg) => {
       setIsLoading(false);
-      setIsError(true);
-      setErrorMsg('Show me the money');
-      download(arg);
+      if(arg.errorMsg) {
+        setIsError(true);
+        setErrorMsg(arg.errorMsg);
+      } else {
+        download(arg.htmltext);
+      }
     })
     return () => {
-      ipcRenderer.removeListener('asynchronous-reply');
-
+      ipcRenderer.removeListener('doc-result');
     }
   }, [])
   
@@ -81,6 +84,10 @@ const Main = () => {
         </Style.Header>
         <Spin spinning={isLoading}>
           <Style.Content>
+          <Row>
+              <Col span={6}><Label>Project Name</Label></Col>
+              <Col span={10}><Input name='projectName' placeholder="My Project" onChange={handleChange} value={dbData.projectName} /></Col>
+            </Row>
             <Row>
               <Col span={6}><Label>DB Host</Label></Col>
               <Col span={18}><Input name='host' placeholder="127.0.0.1" onChange={handleChange} value={dbData.host} /></Col>

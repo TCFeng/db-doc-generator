@@ -13,7 +13,7 @@ function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
-    height: 650,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     }
@@ -49,19 +49,7 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-const sleep = milliseconds => {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
-ipcMain.on('save-data', (event, data) => {
-
-  //PgDocService.getDoc(data);
-  console.log('1111111111');
-  sleep(3000);
-  event.sender.send('asynchronous-reply', '<!DOCTYPE html><html><head></head><body>Hello World</body></html>')
+ipcMain.on('save-data', async (event, data) => {
+  const result = await PgDocService.getDoc(data);
+  event.sender.send('doc-result', result);
 });

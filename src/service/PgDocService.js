@@ -1,28 +1,28 @@
 const DBService = require('./pg/DBService');
+const DocService = require('./pg/DocService');
 
 class PgDocService {
 
     // 1. DB 連線，取得Client
     static async getDoc(params) {
-        const client = new DBService();
+        let htmltext;
+        const dBService = new DBService();
+        const docService = new DocService();
         try {
-            await client.connect(params);
-            const result = await client.query('select * from hcm_user_info limit 1');
-            console.log(result.rows);
+            const tableData = await dBService.getTableSchema(params);
+            const schemaData = docService.fixTableData(tableData);
+            htmltext = docService.genTableDoc(schemaData, params);
         } catch (error) {
-            console.log('fail', error);
-            throw error;
-        } finally {
-            await client.close();
+            return {
+                errorMsg: 'DB Connect Error'
+            };
         }
-
-
-
-
+        console.log({htmltext});
+        return {
+            htmltext
+        };
     }
-    // 2. 產生文件，利用Client做事
-    // 3. 關閉DB，關閉Client
-    // 4. 回傳文件
+    
 }
 
 module.exports = PgDocService;
