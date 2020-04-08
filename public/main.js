@@ -62,5 +62,6 @@ ipcMain.on('save-data', (event, data) => {
 
   //PgDocService.getDoc(data);
   console.log('1111111111');
+  sleep(3000);
   event.sender.send('asynchronous-reply', '<!DOCTYPE html><html><head></head><body>Hello World</body></html>')
 });

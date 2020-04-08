@@ -12,21 +12,8 @@ const {
   ipcRenderer, shell, remote, desktopCapturer, screen, clipboard
 } = electron;
 
-const download = (data) => {
-  const blob = new Blob([data], { type: ' text/html' });
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.setAttribute('hideden', '');
-  a.setAttribute('href', url);
-  a.setAttribute('download', 'index.html');
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
 
-ipcRenderer.on('asynchronous-reply', (event, arg) => {
-  download(arg);
-})
+
 
 
 const Main = () => {
@@ -56,11 +43,31 @@ const Main = () => {
     ipcRenderer.send('save-data', dbData);
   }
 
-  ipcRenderer.on('asynchronous-reply', (event, arg) => {
-    setIsLoading(false);
-    setIsError(true);
-    setErrorMsg('Show me the money');
-  })
+  const download = (data) => {
+    const blob = new Blob([data], { type: ' text/html' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hideden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'index.html');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  useEffect(() => {
+    ipcRenderer.on('asynchronous-reply', (event, arg) => {
+      setIsLoading(false);
+      setIsError(true);
+      setErrorMsg('Show me the money');
+      download(arg);
+    })
+    return () => {
+      ipcRenderer.removeListener('asynchronous-reply');
+
+    }
+  }, [])
+  
 
 
   return (
