@@ -42,16 +42,16 @@ module.exports = {
     },
     resolve: {
         alias: {
-            '~~components': path.resolve(__dirname, 'src/components/'),
-            '~~atoms': path.resolve(__dirname, 'src/components/atoms'),
-            '~~styles': path.resolve(__dirname, 'src/styles'),
+            '~~components': path.resolve(__dirname, 'src/app/components/'),
+            '~~atoms': path.resolve(__dirname, 'src/app/components/atoms'),
+            '~~styles': path.resolve(__dirname, 'src/app/styles'),
         },
         extensions: [
             '.js',
             '.jsx'
         ],
         modules: [
-            path.resolve(__dirname, 'src/'),
+            path.resolve(__dirname, 'src/app'),
             path.resolve(__dirname, 'node_modules/'),
         ]
     },
@@ -61,7 +61,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: path.resolve(__dirname, 'src/index.html'),
+            template: path.resolve(__dirname, 'src/app/index.html'),
             filename: "./index.html"
         }),
         new BundleAnalyzerPlugin()

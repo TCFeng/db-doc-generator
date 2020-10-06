@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const PgDocService = require('../src/service/PgDocService');
+const PgDocService = require('../src/backend/service/PgDocService');
 
 let win;
 

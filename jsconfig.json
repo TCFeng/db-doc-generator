@@ -6,7 +6,7 @@
     "experimentalDecorators": true,
     "baseUrl": "./",
     "paths": {
-      "~~atoms/": ["src/components/atoms/index"]
+      "~~atoms/": ["src/app/components/atoms/index"]
     }
   },
   "exclude": ["node_modules", "dist"]
