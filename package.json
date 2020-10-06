@@ -7,10 +7,24 @@
     "start": "webpack-dev-server --mode development --hot --config webpack.config.js",
     "clean": "rimraf build/* && rimraf dist/*",
     "electron-start": "nodemon --watch public/* --exec cross-env NODE_ENV=development electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run clean && webpack --mode production --config webpack.config.js",
+    "electron-pack": "npm run build && cross-env NODE_ENV=production electron-builder build -w"
+  },
+  "build": {
+    "appId": "com.felton",
+    "productName": "Database Schema Documentation",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "public/main.js"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "author": "TCFeng",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "antd": "^4.0.2",
     "create-html": "^4.1.0",
