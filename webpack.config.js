@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     module: {
@@ -42,7 +43,8 @@ module.exports = {
     resolve: {
         alias: {
             '~~components': path.resolve(__dirname, 'src/components/'),
-            '~~atoms': path.resolve(__dirname, 'src/components/atoms')
+            '~~atoms': path.resolve(__dirname, 'src/components/atoms'),
+            '~~styles': path.resolve(__dirname, 'src/styles'),
         },
         extensions: [
             '.js',
@@ -61,7 +63,8 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: path.resolve(__dirname, 'src/index.html'),
             filename: "./index.html"
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ],
     devServer: {
         compress: true,

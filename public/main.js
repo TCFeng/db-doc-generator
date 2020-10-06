@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const PgDocService = require('../src/service/PgDocService');
 
 let win;
 
@@ -12,7 +13,7 @@ function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     }
@@ -48,3 +49,7 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+ipcMain.on('save-data', async (event, data) => {
+  const result = await PgDocService.getDoc(data);
+  event.sender.send('doc-result', result);
+});

@@ -2,7 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Input, WarningText } from '~~atoms/';
-import { useTranslation } from 'react-i18next';
 // import { FormContext } from './Main';
 
 const Container = styled.div`
@@ -19,7 +18,6 @@ const FormInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
-  const { t } = useTranslation();
   return (
     <Container>
       {
