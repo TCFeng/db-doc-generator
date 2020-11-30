@@ -90,7 +90,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-TCFeng - [@your_twitter](https://twitter.com/your_username) - tcfeng601@gmail.com
+TCFeng - tcfeng601@gmail.com
 
 Project Link: [https://github.com/TCFeng/db-doc-generator](https://github.com/TCFeng/db-doc-generator)
 
